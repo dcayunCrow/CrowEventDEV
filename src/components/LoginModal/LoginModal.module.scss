@@ -1,0 +1,105 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.loginModal {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 32px;
+  gap: 24px;
+  
+  /* Posicionamiento centrado vertical y horizontalmente */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 32px);
+  max-width: 466px;
+  z-index: 1002;
+  
+  background: #FFFFFF;
+  border: 1px solid #D9D9D9;
+  box-shadow: 0px 16px 32px -4px rgba(12, 12, 13, 0.1), 0px 4px 4px -4px rgba(12, 12, 13, 0.05);
+  border-radius: $radius-crow;
+  font-family: $font-primary;
+
+  .closeBtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    right: 8px;
+    top: 8px;
+    background: transparent;
+    border: none;
+    border-radius: 32px;
+    cursor: pointer;
+    color: #1E1E1E;
+    transition: background-color 0.2s;
+    z-index: 2;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+
+    svg {
+      pointer-events: none;
+    }
+  }
+
+  .textContent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 12px;
+    width: 100%;
+    z-index: 0;
+
+    h3 {
+      margin: 0;
+      @include text-h3;
+      color: #000000;
+      width: 100%;
+    }
+
+    p {
+      margin: 0;
+      @include text-paragraph;
+      color: #000000;
+      width: 100%;
+    }
+  }
+
+  .btnPrimary {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 16px;
+    gap: 10px;
+    width: 100%;
+    height: 40px;
+    background: $color-brand-primary;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    z-index: 1;
+    transition: background-color 0.2s;
+
+    span {
+      @include text-button;
+      text-align: center;
+      color: $color-text-primary;
+    }
+
+    &:hover {
+      background: darken($color-brand-primary, 10%);
+    }
+  }
+}

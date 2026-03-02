@@ -1,0 +1,76 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: rgba(#242424, 0.5);
+  backdrop-filter: blur(5.8px);
+  -webkit-backdrop-filter: blur(5.8px); // Safari support
+  z-index: 1000;
+}
+
+.navbarContent {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.searchBar {
+  flex: 1;
+  max-width: 600px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background-color: rgba($color-bg-menu, 0.6);
+  border: 1px solid rgba($color-text-secondary, 0.2);
+  border-radius: 8px;
+  color: $color-text-primary;
+  font-size: $font-size-sm;
+  outline: none;
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: $color-text-placeholder;
+  }
+
+  &:focus {
+    border-color: $color-brand-primary;
+    background-color: rgba($color-bg-menu, 0.8);
+  }
+}
+
+.menuButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.hamburgerLine {
+  width: 24px;
+  height: 2px;
+  background-color: $color-brand-primary;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}

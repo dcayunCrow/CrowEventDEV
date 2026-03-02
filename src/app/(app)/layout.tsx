@@ -1,0 +1,19 @@
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import styles from './appLayout.module.scss';
+
+export default function AppLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className={styles.appLayout}>
+      <Navbar />
+      <main className={styles.appMain}>
+        {children}
+      </main>
+      <Footer />
+    </div>
+  );
+}

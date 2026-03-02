@@ -1,0 +1,36 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.explorePage {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+
+  .categoriesGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    width: 100%;
+
+    @include respond-to('sm') {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    @include respond-to('md') {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    @include respond-to('lg') {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.5rem;
+    }
+
+    @include respond-to('xl') {
+      grid-template-columns: repeat(6, 1fr);
+      gap: 2rem;
+    }
+  }
+}

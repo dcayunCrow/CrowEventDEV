@@ -1,0 +1,48 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.home {
+  width: 100%;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  @include text-h1;
+  color: $color-text-primary;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  @include text-paragraph;
+  color: $color-text-secondary;
+}
+
+// Sección de lista de eventos
+.eventsList {
+  margin-top: 3rem;
+}
+
+.sectionTitle {
+  @include text-h2;
+  color: $color-text-primary;
+  margin-bottom: 1.5rem;
+}
+
+.eventos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  justify-items: center;
+
+  @include respond-to('md') {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  @include respond-to('lg') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

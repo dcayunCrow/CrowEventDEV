@@ -1,0 +1,103 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.loginContainer {
+  @include flex-center;
+  width: 100%;
+}
+
+.loginCard {
+  background-color: $color-bg-contrast;
+  border-radius: $radius-crow;
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.title {
+  @include text-h2;
+  color: $color-text-primary;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.subtitle {
+  @include text-paragraph;
+  color: $color-text-secondary;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    @include text-small-highlighted;
+    color: $color-text-secondary;
+  }
+}
+
+.input {
+  @include text-paragraph;
+  background-color: $color-bg-menu;
+  border: 1px solid transparent;
+  border-radius: $radius-crow;
+  color: $color-text-primary;
+  padding: 0.75rem 1rem;
+  @include transition-fast(border-color);
+
+  &::placeholder {
+    color: $color-text-placeholder;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-brand-primary;
+  }
+}
+
+.submitButton {
+  @include text-button;
+  background-color: $color-brand-primary;
+  border: none;
+  border-radius: $radius-crow;
+  color: $color-text-primary;
+  cursor: pointer;
+  padding: 0.875rem 1.5rem;
+  margin-top: 0.5rem;
+  @include transition-fast(opacity);
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.footer {
+  @include text-small;
+  color: $color-text-secondary;
+  text-align: center;
+  margin-top: 1.5rem;
+
+  a {
+    color: $color-brand-primary;
+    text-decoration: none;
+    font-weight: $font-weight-semibold;
+    @include transition-fast(opacity);
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

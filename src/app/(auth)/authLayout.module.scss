@@ -1,0 +1,19 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.authLayout {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: $color-bg-menu;
+  @include flex-center;
+}
+
+.authMain {
+  width: 100%;
+  max-width: 440px;
+  padding: 1rem;
+
+  @include respond-to('md') {
+    padding: 1.5rem;
+  }
+}

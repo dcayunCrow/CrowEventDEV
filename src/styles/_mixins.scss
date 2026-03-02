@@ -1,0 +1,361 @@
+// ==========================================
+// CROW - Mixins & Utilities
+// ==========================================
+
+@use 'variables' as *;
+
+// ------------------------------------------
+// RESPONSIVE (Mobile First)
+// ------------------------------------------
+
+/// Aplica estilos desde un breakpoint hacia arriba
+/// @param {String} $breakpoint - sm, md, lg, xl, 2xl
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint '#{$breakpoint}' no existe en $breakpoints.";
+  }
+}
+
+/// Aplica estilos hasta un breakpoint (no inclusive)
+/// @param {String} $breakpoint - sm, md, lg, xl, 2xl
+@mixin respond-below($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (max-width: calc(map-get($breakpoints, $breakpoint) - 1px)) {
+      @content;
+    }
+  }
+}
+
+/// Aplica estilos solo en un rango de breakpoints
+@mixin respond-between($lower, $upper) {
+  @if map-has-key($breakpoints, $lower) and map-has-key($breakpoints, $upper) {
+    @media (min-width: map-get($breakpoints, $lower)) and (max-width: calc(map-get($breakpoints, $upper) - 1px)) {
+      @content;
+    }
+  }
+}
+
+// ------------------------------------------
+// TYPOGRAPHY STYLES
+// ------------------------------------------
+
+// Headings
+@mixin text-h1 {
+  font-family: $font-primary;
+  font-size: $heading-h1-size;
+  font-weight: $heading-h1-weight;
+}
+
+@mixin text-h2 {
+  font-family: $font-primary;
+  font-size: $heading-h2-size;
+  font-weight: $heading-h2-weight;
+}
+
+@mixin text-h3 {
+  font-family: $font-primary;
+  font-size: $heading-h3-size;
+  font-weight: $heading-h3-weight;
+}
+
+@mixin text-h4 {
+  font-family: $font-primary;
+  font-size: $heading-h4-size;
+  font-weight: $heading-h4-weight;
+}
+
+// Body
+@mixin text-paragraph {
+  font-family: $font-primary;
+  font-size: $body-paragraph-size;
+  font-weight: $body-paragraph-weight;
+}
+
+@mixin text-highlighted {
+  font-family: $font-primary;
+  font-size: $body-highlighted-size;
+  font-weight: $body-highlighted-weight;
+}
+
+@mixin text-large {
+  font-family: $font-primary;
+  font-size: $body-large-size;
+  font-weight: $body-large-weight;
+}
+
+// Labels
+@mixin text-button {
+  font-family: $font-primary;
+  font-size: $label-button-size;
+  font-weight: $label-button-weight;
+}
+
+@mixin text-small {
+  font-family: $font-primary;
+  font-size: $label-small-size;
+  font-weight: $label-small-weight;
+}
+
+@mixin text-small-highlighted {
+  font-family: $font-primary;
+  font-size: $label-small-highlighted-size;
+  font-weight: $label-small-highlighted-weight;
+}
+
+// ------------------------------------------
+// FLEXBOX
+// ------------------------------------------
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@mixin flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+// ------------------------------------------
+// GRID
+// ------------------------------------------
+
+@mixin grid-center {
+  display: grid;
+  place-items: center;
+}
+
+/// Grid responsive que se adapta automáticamente
+/// @param {Length} $min-width - Ancho mínimo de cada columna
+/// @param {Length} $gap - Espacio entre elementos
+@mixin grid-auto-fit($min-width: 250px, $gap: 1rem) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
+  gap: $gap;
+}
+
+@mixin grid-auto-fill($min-width: 250px, $gap: 1rem) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min-width, 1fr));
+  gap: $gap;
+}
+
+// ------------------------------------------
+// TYPOGRAPHY
+// ------------------------------------------
+
+/// Truncar texto con ellipsis (una línea)
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/// Truncar texto multilínea con ellipsis
+/// @param {Number} $lines - Número de líneas a mostrar
+@mixin truncate-lines($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/// Texto que no se puede seleccionar
+@mixin no-select {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/// Forzar wrapping de palabras largas
+@mixin word-break {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+// ------------------------------------------
+// TRANSITIONS
+// ------------------------------------------
+
+/// Transición por defecto
+@mixin transition($properties: all, $duration: 200ms, $timing: cubic-bezier(0.4, 0, 0.2, 1)) {
+  transition: $properties $duration $timing;
+}
+
+@mixin transition-fast($properties: all) {
+  transition: $properties 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@mixin transition-slow($properties: all) {
+  transition: $properties 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// ------------------------------------------
+// VISUAL
+// ------------------------------------------
+
+/// Ocultar scrollbar pero mantener funcionalidad
+@mixin hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/// Custom scrollbar
+@mixin custom-scrollbar($width: 8px, $track: #e4e4e7, $thumb: #a1a1aa) {
+  scrollbar-width: thin;
+  scrollbar-color: $thumb $track;
+  
+  &::-webkit-scrollbar {
+    width: $width;
+    height: $width;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: $track;
+    border-radius: 9999px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: $thumb;
+    border-radius: 9999px;
+    
+    &:hover {
+      background: darken($thumb, 10%);
+    }
+  }
+}
+
+/// Aspect ratio container
+@mixin aspect-ratio($ratio: 1/1) {
+  aspect-ratio: $ratio;
+}
+
+/// Cover image
+@mixin cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/// Contain image
+@mixin contain-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/// Overlay oscuro
+@mixin overlay($opacity: 0.5) {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(#000000, $opacity);
+}
+
+// ------------------------------------------
+// POSITIONING
+// ------------------------------------------
+
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin absolute-fill {
+  position: absolute;
+  inset: 0;
+}
+
+@mixin fixed-fill {
+  position: fixed;
+  inset: 0;
+}
+
+@mixin sticky-top($top: 0) {
+  position: sticky;
+  top: $top;
+}
+
+// ------------------------------------------
+// ACCESSIBILITY
+// ------------------------------------------
+
+/// Solo visible para screen readers
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/// Focus visible para accesibilidad
+@mixin focus-ring($color: #3b82f6, $offset: 2px) {
+  &:focus-visible {
+    outline: 2px solid $color;
+    outline-offset: $offset;
+  }
+}
+
+// ------------------------------------------
+// MOBILE SPECIFIC
+// ------------------------------------------
+
+/// Safe area padding para notch y home indicator
+@mixin safe-area-padding {
+  padding-top: env(safe-area-inset-top);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+}
+
+/// Disable touch highlight en móviles
+@mixin no-tap-highlight {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/// Optimizado para touch
+@mixin touch-target($min-size: 44px) {
+  min-width: $min-size;
+  min-height: $min-size;
+}

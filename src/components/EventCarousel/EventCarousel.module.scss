@@ -1,0 +1,63 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.carousel {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
+  > * {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+
+    @include respond-to('md') {
+      flex: 0 0 calc(50% - 0.5rem);
+    }
+
+    @include respond-to('lg') {
+      flex: 0 0 calc(33.333% - 0.667rem);
+    }
+  }
+}
+
+.indicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba($color-text-primary, 0.3);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  @include transition-fast(all);
+
+  &:hover {
+    background-color: rgba($color-text-primary, 0.5);
+    transform: scale(1.2);
+  }
+
+  &.active {
+    background-color: $color-brand-primary;
+    width: 24px;
+    border-radius: 4px;
+  }
+}
