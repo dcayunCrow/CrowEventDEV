@@ -83,8 +83,7 @@
   }
 
   svg {
-    width: 16px;
-    height: 16px;
+    display: block;
   }
 }
 
@@ -124,14 +123,13 @@
   border: none;
   color: $color-text-secondary;
   cursor: pointer;
-  padding: 4px;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: color 0.2s ease;
   flex-shrink: 0;
-  position: relative;
-  z-index: 10;
+  margin-right: -8px;
 
   &:hover {
     color: $color-text-primary;
@@ -139,7 +137,6 @@
 
   svg {
     display: block;
-    pointer-events: none;
   }
 }
 
@@ -154,13 +151,6 @@
   span {
     line-height: 1.4;
   }
-}
-
-.venueIcon {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-  opacity: 0.8;
 }
 
 // Responsive

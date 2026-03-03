@@ -67,17 +67,21 @@
       background: transparent;
       border: none;
       cursor: pointer;
+      padding: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       height: 40px;
       color: $color-brand-primary;
       transition: opacity 0.2s;
+
+      svg {
+        display: block;
+      }
       
       &:hover {
         opacity: 0.8;
       }
-
       svg {
         pointer-events: none;
       }

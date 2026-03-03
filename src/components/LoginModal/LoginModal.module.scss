@@ -26,13 +26,10 @@
 
   .closeBtn {
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 8px;
     position: absolute;
-    width: 36px;
-    height: 36px;
     right: 8px;
     top: 8px;
     background: transparent;
@@ -48,6 +45,7 @@
     }
 
     svg {
+      display: block;
       pointer-events: none;
     }
   }
