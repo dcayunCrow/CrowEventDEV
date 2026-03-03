@@ -2,22 +2,8 @@
 
 import { useMemo } from 'react';
 import SearchResultCard from '../SearchResultCard';
+import { Event } from '@/types/event';
 import styles from './SearchResults.module.scss';
-
-interface Event {
-  _id: string;
-  title: string;
-  media: {
-    imgs: string[];
-  };
-  schedule: {
-    date_start: string;
-  };
-  detail: {
-    venue?: string;
-    address?: string;
-  };
-}
 
 interface SearchResultsProps {
   searchQuery: string;
