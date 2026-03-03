@@ -24,16 +24,31 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  cursor: pointer;
+}
+
+.searchContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 600px;
+  transition: gap 0.3s ease;
+
+  &.searchContainerFocused {
+    gap: 0;
+  }
 }
 
 .searchBar {
   flex: 1;
-  max-width: 600px;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
 .searchInput {
   width: 100%;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 2.5rem 0.5rem 1rem;
   background-color: rgba($color-bg-menu, 0.6);
   border: 1px solid rgba($color-text-secondary, 0.2);
   border-radius: 8px;
@@ -52,25 +67,83 @@
   }
 }
 
+.clearButton {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  color: $color-text-secondary;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: $color-text-primary;
+    background-color: rgba($color-text-secondary, 0.1);
+  }
+
+  svg {
+    display: block;
+  }
+}
+
+.exploreButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: $color-text-secondary;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  opacity: 1;
+  width: auto;
+  overflow: hidden;
+  padding: 0;
+
+  svg {
+    display: block;
+  }
+
+  &:hover {
+    color: $color-brand-primary;
+  }
+
+  &.exploreButtonHidden {
+    opacity: 0;
+    width: 0;
+    pointer-events: none;
+  }
+}
+
 .menuButton {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 5px;
-  width: 40px;
   height: 40px;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
   flex-shrink: 0;
-}
+  color: $color-brand-primary;
+  transition: color 0.3s ease;
 
-.hamburgerLine {
-  width: 24px;
-  height: 2px;
-  background-color: $color-brand-primary;
-  border-radius: 2px;
-  transition: all 0.3s ease;
+  &:hover {
+    color: lighten($color-brand-primary, 10%);
+  }
+
+  svg {
+    display: block;
+  }
 }

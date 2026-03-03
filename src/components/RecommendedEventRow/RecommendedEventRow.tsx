@@ -48,6 +48,7 @@ export default function RecommendedEventRow({
       <div className={styles.rowHeader} onClick={handleViewAll}>
         <h3>{rowTitle}</h3>
         <div className={styles.iconCircle}>
+          {/* TODO: cambiar por iconos de librería que vamos a definir */}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="9 18 15 12 9 6"></polyline>
           </svg>

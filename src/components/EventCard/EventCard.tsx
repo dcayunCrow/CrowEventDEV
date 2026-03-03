@@ -76,6 +76,7 @@ const EventCard: React.FC<EventCardProps> = ({
           onClick={handleFavoriteClick}
           aria-label="Add to favorites"
         >
+          {/* TODO: cambiar por iconos de librería que vamos a definir */}
           <svg 
             width="24" 
             height="24" 
@@ -101,6 +102,7 @@ const EventCard: React.FC<EventCardProps> = ({
             onClick={handleMenuToggle}
             aria-label="More options"
           >
+            {/* TODO: cambiar por iconos de librería que vamos a definir */}
             <svg width="4" height="16" viewBox="0 0 4 16" fill="currentColor">
               <circle cx="2" cy="2" r="2" />
               <circle cx="2" cy="8" r="2" />
@@ -110,6 +112,7 @@ const EventCard: React.FC<EventCardProps> = ({
         </div>
 
         <div className={styles.venue}>
+          {/* TODO: cambiar por iconos de librería que vamos a definir */}
           <svg 
             width="16" 
             height="16" 
