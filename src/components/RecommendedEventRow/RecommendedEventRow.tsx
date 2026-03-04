@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { LuChevronRight } from 'react-icons/lu';
 import styles from './RecommendedEventRow.module.scss';
 
@@ -26,6 +27,7 @@ export default function RecommendedEventRow({
   onViewAllClick,
   onEventClick 
 }: RecommendedEventRowProps) {
+  const router = useRouter();
   
   const handleViewAll = () => {
     if (onViewAllClick) {
@@ -39,7 +41,7 @@ export default function RecommendedEventRow({
     if (onEventClick) {
       onEventClick(eventId);
     } else {
-      console.log('Evento clickeado:', eventId);
+      router.push(`/event/${eventId}`);
     }
   };
 

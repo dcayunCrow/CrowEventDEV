@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { LuEllipsisVertical } from 'react-icons/lu';
 import EventCardMenu from '../EventCardMenu';
 import Overlay from '../Overlay';
@@ -24,7 +25,16 @@ export default function SearchResultCard({
   imageUrl,
   onClick
 }: SearchResultCardProps) {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  const handleCardClick = () => {
+    if (onClick) {
+      onClick(eventId);
+    } else {
+      router.push(`/event/${eventId}`);
+    }
+  };
   
   // Función para manejar el clic en los 3 puntitos sin disparar el clic de toda la tarjeta
   const handleOptionsClick = (e: React.MouseEvent) => {
@@ -40,7 +50,7 @@ export default function SearchResultCard({
     <>
       <div 
         className={styles.searchResultCard} 
-        onClick={() => onClick && onClick(eventId)}
+        onClick={handleCardClick}
       >
         {/* Miniatura de la tarjeta */}
         <div className={styles.cardThumbnail}>

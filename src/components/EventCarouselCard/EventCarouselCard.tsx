@@ -1,5 +1,8 @@
+'use client';
+
 import { Event } from '@/types/event';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import styles from './EventCarouselCard.module.scss';
 
 interface EventCarouselCardProps {
@@ -7,6 +10,8 @@ interface EventCarouselCardProps {
 }
 
 export default function EventCarouselCard({ event }: EventCarouselCardProps) {
+  const router = useRouter();
+
   // Formatear fecha
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -17,12 +22,16 @@ export default function EventCarouselCard({ event }: EventCarouselCardProps) {
     });
   };
 
+  const handleClick = () => {
+    router.push(`/event/${event._id}`);
+  };
+
   // Obtener venue del detail
   const venue = (event.detail as any)?.venue || 'Por confirmar';
   const hasImage = event.media.imgs && event.media.imgs.length > 0;
   
   return (
-    <article className={styles.card}>
+    <article className={styles.card} onClick={handleClick}>
       {hasImage ? (
         <div 
           className={styles.background}

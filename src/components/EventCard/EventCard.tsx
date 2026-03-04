@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { LuHeart, LuMap, LuEllipsisVertical } from 'react-icons/lu';
 import EventCardMenu from '../EventCardMenu';
 import Overlay from '../Overlay';
@@ -24,15 +25,22 @@ const EventCard: React.FC<EventCardProps> = ({
   eventId,
   initialFavorite = false,
 }) => {
+  const router = useRouter();
   const [isFavorite, setIsFavorite] = useState(initialFavorite);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleFavoriteClick = () => {
+  const handleCardClick = () => {
+    router.push(`/event/${eventId}`);
+  };
+
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setIsFavorite(!isFavorite);
     // TODO: Aquí iría la lógica para guardar en backend/localStorage
   };
 
-  const handleMenuToggle = () => {
+  const handleMenuToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setIsMenuOpen(!isMenuOpen);
   };
 
@@ -41,7 +49,7 @@ const EventCard: React.FC<EventCardProps> = ({
   };
 
   return (
-    <div className={styles.eventCard}>
+    <div className={styles.eventCard} onClick={handleCardClick}>
       <div className={styles.imageContainer}>
         {imageUrl ? (
           <>

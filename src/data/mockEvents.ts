@@ -16,7 +16,7 @@ export const mockEvents: Event[] = [
       imgs: [
         "https://qualitycenter.com/wp-content/uploads/2025/12/960x400-1-1.jpg"
       ],
-      videos: [],
+      videos: ['https://www.youtube.com/watch?v=CuHAa0ChhdM'],
       url: "https://qualitycenter.com/shows/god-save-the-queen/"
     },
     description: "La banda tributo a Queen más importante del mundo regresa a Argentina con un show inolvidable. God Save The Queen, reconocida por la crítica internacional como la recreación más fiel del mítico grupo liderado por Freddie Mercury. Con una puesta en escena arrolladora, más de dos décadas recorriendo el planeta, God Save The Queen ha llevado los grandes clásicos de Queen —como Bohemian Rhapsody, We Will Rock You, Radio Ga Ga o Somebody to Love—a millones de personas en todo el mundo.",
@@ -405,7 +405,7 @@ export const mockEvents: Event[] = [
       imgs: [
         "https://imagenes.alpogo.com/eventos/alta_evento_1770076820_69813a94483a5.jpg"
       ],
-      videos: [],
+      videos: ['https://www.youtube.com/watch?v=Cr8K88UcO0s&list=RDCr8K88UcO0s&start_radio=1'],
       url: "https://alpogo.com/evento/flema-en-salon-pueyrredon-24187"
     },
     description: "La fiesta mas grande de Bad Bunny en Argentina llega a Cordoba. Despues de mas de 15 ediciones en Buenos Aires desembarca la fiesta mas exclusiva de Bad Bunny, Noches iconicas de Benito con un 100% on set en toda su discografia. Nos preparamos para un Baile Inolvidable en el corazon de Cordoba. Te esperamos para una noche en donde te vamos a llevar por todas las eras de BAD BUNNY. Fiesta Fandom lo va hacer realidad junto a Bad Bunny Argentina.",
