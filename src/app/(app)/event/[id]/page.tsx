@@ -6,6 +6,10 @@ import { useState, useMemo, useEffect, useRef } from 'react';
 import { LuHeart, LuShare2, LuBell, LuMap, LuCalendar, LuClock, LuTicket, LuMessageSquareText } from 'react-icons/lu';
 import { mockEvents } from '@/data/mockEvents';
 import AccordionItem from '@/components/AccordionItem';
+import EventNotFound from '@/components/EventNotFound';
+import { formatDate, formatTime } from '@/utils/dateUtils';
+import { formatPrice } from '@/utils/priceUtils';
+import { getYouTubeEmbedUrl, getYouTubeThumbnail } from '@/utils/youtubeUtils';
 import styles from './event.module.scss';
 
 export default function EventDetailPage() {
@@ -41,107 +45,8 @@ export default function EventDetailPage() {
   }, [event]);
 
   if (!event) {
-    return (
-
-      // TODO: Crear una página de error 404 personalizada para eventos no encontrados
-      <div className={styles.notFound}>
-        <h1>Evento no encontrado</h1>
-        <p>El evento que buscas no existe o fue eliminado.</p>
-      </div>
-    );
+    return <EventNotFound />;
   }
-
-  // Formatear fecha - formato consistente para SSR
-  const formatDate = (dateString: string) => {
-    if (!isClient) {
-      // En el servidor, usar formato simple para evitar problemas de hidratación
-      return new Date(dateString).toISOString().split('T')[0];
-    }
-    const date = new Date(dateString);
-    const options: Intl.DateTimeFormatOptions = {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    };
-    return date.toLocaleDateString('es-AR', options);
-  };
-
-  // TODO: Extraer lógica de formateo a un helper para reutilizar en otros componentes (EventCard, SearchResultCard, etc.)
-  // Formatear hora - formato consistente para SSR
-  const formatTime = (dateString: string) => {
-    if (!isClient) {
-      // En el servidor, usar formato simple
-      const date = new Date(dateString);
-      return `${date.getUTCHours()}:${date.getUTCMinutes().toString().padStart(2, '0')}`;
-    }
-    const date = new Date(dateString);
-    return date.toLocaleTimeString('es-AR', { 
-      hour: '2-digit', 
-      minute: '2-digit',
-      hour12: false 
-    });
-  };
-
-  // TODO: Extraer lógica de formateo a un helper para reutilizar en otros componentes (EventCard, SearchResultCard, etc.)
-  // Formatear precio
-  const formatPrice = () => {
-    if (event.ticket.access === 'FREE') {
-      return 'Gratis';
-    }
-    const amount = event.ticket.amount;
-    const currency = event.ticket.currency;
-    
-    if (!amount) {
-      return 'Consultar precio';
-    }
-    
-    if (currency === 'ARS') {
-      return `$${amount.toLocaleString('es-AR')}`;
-    }
-    return `${currency} ${amount}`;
-  };
-
-  // TODO: Extraer lógica de conversión de URL de YouTube a un helper para reutilizar en otros componentes (EventCarouselCard, etc.)
-  // Convertir URL de YouTube a formato embed
-  const getYouTubeEmbedUrl = (url: string) => {
-    try {
-      const urlObj = new URL(url);
-      let videoId = '';
-      
-      // Formato: https://www.youtube.com/watch?v=VIDEO_ID
-      if (urlObj.hostname.includes('youtube.com')) {
-        videoId = urlObj.searchParams.get('v') || '';
-      }
-      // Formato: https://youtu.be/VIDEO_ID
-      else if (urlObj.hostname.includes('youtu.be')) {
-        videoId = urlObj.pathname.slice(1);
-      }
-      
-      return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
-    } catch {
-      return null;
-    }
-  };
-
-  // TODO: Extraer lógica de obtención de thumbnail de YouTube a un helper para reutilizar en otros componentes (EventCarouselCard, etc.)
-  // Obtener thumbnail de YouTube
-  const getYouTubeThumbnail = (url: string) => {
-    try {
-      const urlObj = new URL(url);
-      let videoId = '';
-
-      if (urlObj.hostname.includes('youtube.com')) {
-        videoId = urlObj.searchParams.get('v') || '';
-      } else if (urlObj.hostname.includes('youtu.be')) {
-        videoId = urlObj.pathname.slice(1);
-      }
-
-      return videoId ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` : null;
-    } catch {
-      return null;
-    }
-  };
 
   const handleFavoriteClick = () => {
     setIsFavorite(!isFavorite);
@@ -254,12 +159,12 @@ export default function EventDetailPage() {
         {/* Schedule Info */}
         <div className={styles.infoSection}>
           <AccordionItem
-            title={formatDate(event.schedule.date_start)}
+            title={formatDate(event.schedule.date_start, isClient)}
             icon={<LuCalendar size={20} />}
           />
           
           <AccordionItem
-            title={`${formatTime(event.schedule.date_start)} hs`}
+            title={`${formatTime(event.schedule.date_start, isClient)} hs`}
             icon={<LuClock size={20} />}
           />
 
@@ -315,7 +220,7 @@ export default function EventDetailPage() {
             <LuTicket size={24} />
             <div>
               <p className={styles.ticketLabel}>Precio</p>
-              <p className={styles.ticketPrice}>{formatPrice()}</p>
+              <p className={styles.ticketPrice}>{formatPrice(event.ticket)}</p>
             </div>
           </div>
           

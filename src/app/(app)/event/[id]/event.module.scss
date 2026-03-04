@@ -145,6 +145,7 @@
     @include text-h1;
     color: $color-text-primary;
     margin-bottom: 1rem;
+    line-height: 1.2;
   }
 
   .subtitle {
@@ -382,7 +383,7 @@
 }
 
 .notFound {
-  min-height: 100vh;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
