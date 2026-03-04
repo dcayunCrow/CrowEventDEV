@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { LuHeart, LuMap, LuEllipsisVertical } from 'react-icons/lu';
@@ -111,15 +112,16 @@ const EventCard: React.FC<EventCardProps> = ({
         </div>
       </div>
 
-      {isMenuOpen && (
+      {isMenuOpen && createPortal(
         <>
           <Overlay onClick={handleMenuClose} />
-          <EventCardMenu 
+          <EventCardMenu
             onClose={handleMenuClose}
             title={title}
             date={date}
           />
-        </>
+        </>,
+        document.body
       )}
     </div>
   );

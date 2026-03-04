@@ -10,7 +10,7 @@ interface EventCardMenuProps {
 
 export default function EventCardMenu({ onClose, title, date }: EventCardMenuProps) {
   return (
-    <div className={styles.cardMenu}>
+    <div className={styles.cardMenu} onClick={(e) => e.stopPropagation()}>
       <div className={styles.menuHeader}>
         <div className={styles.headerInfo}>
           <h3>{title}</h3>

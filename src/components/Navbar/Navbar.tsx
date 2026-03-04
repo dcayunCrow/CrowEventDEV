@@ -90,6 +90,7 @@ export default function Navbar() {
               aria-label="Explorar"
             >
               <BinocularsIcon size={20} />
+              <p>Explorar</p>
             </button>
           </div>
 

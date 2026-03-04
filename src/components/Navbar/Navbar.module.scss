@@ -97,6 +97,7 @@
 
 .exploreButton {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background: none;
@@ -110,6 +111,12 @@
   width: auto;
   overflow: hidden;
   padding: 0;
+
+  p {
+    margin: 0;
+    font-size: .5rem;
+    transition: opacity 0.3s ease;
+  }
 
   svg {
     display: block;

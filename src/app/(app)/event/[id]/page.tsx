@@ -23,6 +23,10 @@ export default function EventDetailPage() {
   const ticketSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     setIsClient(true);
   }, []);
 
