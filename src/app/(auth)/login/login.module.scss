@@ -1,57 +1,132 @@
 @use "../../../styles/variables" as *;
 @use "../../../styles/mixins" as *;
 
-.loginContainer {
-  @include flex-center;
+// ----------------------------------------
+// Login Screen
+// ----------------------------------------
+
+.loginScreen {
+  @include flex-column-center;
   width: 100%;
 }
 
-.loginCard {
-  background-color: $color-bg-contrast;
-  border-radius: $radius-crow;
-  padding: 2rem;
-  width: 100%;
-  max-width: 400px;
-}
+// ----------------------------------------
+// Logo
+// ----------------------------------------
 
-.title {
-  @include text-h2;
-  color: $color-text-primary;
-  margin-bottom: 0.5rem;
-  text-align: center;
-}
-
-.subtitle {
-  @include text-paragraph;
-  color: $color-text-secondary;
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.form {
+.logoContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+.logoImage {
+  width: 4.25rem;
+  height: auto;
+}
+
+.logoText {
+  font-family: $font-primary;
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  line-height: 1;
+  color: $color-brand-primary;
+  margin: 0 0 2px -10px;
+  align-self: flex-end;
+}
+
+// ----------------------------------------
+// Login Content
+// ----------------------------------------
+
+.loginContent {
+  @include flex-column-center;
+  width: 100%;
+  max-width: 24.375rem;
   gap: 1.5rem;
 }
 
-.formGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+.loginTitle {
+  @include text-h4;
+  text-align: center;
+  color: $color-text-primary;
+  margin: 0;
+}
 
-  label {
-    @include text-small-highlighted;
-    color: $color-text-secondary;
+// ----------------------------------------
+// Google Button
+// ----------------------------------------
+
+.btnGoogle {
+  @include flex-center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 20.4375rem;
+  height: 2.5rem;
+  background: #EEEEEE;
+  border-radius: $radius-crow;
+  border: none;
+  cursor: pointer;
+  @include transition-fast(background-color);
+
+  span {
+    @include text-button;
+    font-weight: $font-weight-semibold;
+    color: $color-black;
+  }
+
+  &:hover {
+    background: #e0e0e0;
   }
 }
 
-.input {
-  @include text-paragraph;
-  background-color: $color-bg-menu;
-  border: 1px solid transparent;
+// ----------------------------------------
+// Divider
+// ----------------------------------------
+
+.divider {
+  @include flex-center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 20.4375rem;
+
+  span {
+    @include text-button;
+    font-weight: $font-weight-regular;
+    color: $color-text-placeholder;
+  }
+}
+
+.line {
+  flex-grow: 1;
+  height: 1px;
+  background: rgba($color-white, 0.2);
+}
+
+// ----------------------------------------
+// Email Form
+// ----------------------------------------
+
+.loginForm {
+  @include flex-column-center;
+  width: 100%;
+  max-width: 20.4375rem;
+  gap: 1rem;
+}
+
+.emailInput {
+  @include text-button;
+  font-weight: $font-weight-regular;
+  box-sizing: border-box;
+  width: 100%;
+  height: 2.5rem;
+  padding: 0.5rem 1rem;
+  background: $color-white;
+  border: 1px solid #E0E0E0;
   border-radius: $radius-crow;
-  color: $color-text-primary;
-  padding: 0.75rem 1rem;
+  color: $color-black;
   @include transition-fast(border-color);
 
   &::placeholder {
@@ -64,40 +139,36 @@
   }
 }
 
-.submitButton {
-  @include text-button;
-  background-color: $color-brand-primary;
-  border: none;
+.btnSubmit {
+  @include flex-center;
+  width: 100%;
+  height: 2.5rem;
+  background: $color-brand-primary;
   border-radius: $radius-crow;
-  color: $color-text-primary;
+  border: none;
   cursor: pointer;
-  padding: 0.875rem 1.5rem;
-  margin-top: 0.5rem;
-  @include transition-fast(opacity);
+  @include transition-fast(background-color);
 
-  &:hover {
-    opacity: 0.9;
+  span {
+    @include text-button;
+    color: $color-white;
   }
 
-  &:active {
-    opacity: 0.8;
+  &:hover {
+    background: #c52424;
   }
 }
 
-.footer {
-  @include text-small;
-  color: $color-text-secondary;
+// ----------------------------------------
+// Terms Text
+// ----------------------------------------
+
+.termsText {
+  @include text-button;
+  width: 100%;
+  max-width: 21.375rem;
   text-align: center;
-  margin-top: 1.5rem;
-
-  a {
-    color: $color-brand-primary;
-    text-decoration: none;
-    font-weight: $font-weight-semibold;
-    @include transition-fast(opacity);
-
-    &:hover {
-      opacity: 0.8;
-    }
-  }
+  color: $color-text-secondary;
+  margin: 0;
+  margin-top: 0.5rem;
 }

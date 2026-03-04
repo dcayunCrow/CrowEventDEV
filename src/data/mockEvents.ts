@@ -519,6 +519,221 @@ export const mockEvents: Event[] = [
     },
     date_created: "2026-02-01T10:00:00.000Z",
     last_updated: "2026-02-10T14:30:00.000Z"
+  },
+  {
+    _id: "65f1a2b3c4d5e6f7a8b9e001",
+    is_active: true,
+    is_verified: true,
+    views: 3421,
+    scope: "PUBLIC",
+    status: "APPROVED",
+    status_reason: "APPROVED",
+    type: "concert",
+    title: "Alejandro Sanz",
+    subtitle: "Gira Sudamericana 2026",
+    media: {
+      imgs: [
+        "https://cdn.getcrowder.com/images/fc8ca163-0666-4acc-abf9-3b0af1615b25-sanzcbadesktop.jpg",
+        "https://cdn.getcrowder.com/images/77381068-f13a-496d-915d-549400b6a42a-640x640-1.png"
+      ],
+      videos: [],
+      url: "https://www.edenentradas.ar/"
+    },
+    description: "Alejandro Sanz llega a Córdoba para brindar un show inolvidable en el que repasará todos sus grandes éxitos y presentará sus nuevos temas. Un encuentro imperdible con uno de los artistas latinos más reconocidos a nivel mundial.",
+    tags: ["concert", "alejandro sanz", "pop", "romántico", "música latina"],
+    owner_id: "65f1a2b3c4d5e6f7a8b9c000",
+    location_id: "65f1a2b3c4d5e6f7a8b9c666",
+    schedule: {
+      timezone: "America/Argentina/Buenos_Aires",
+      date_start: "2026-03-09T00:00:00.000Z",
+      date_end: "2026-03-09T03:00:00.000Z"
+    },
+    ticket: {
+      access: "PAID",
+      currency: "ARS",
+      amount: 95000, 
+      url: "https://www.edenentradas.ar/",
+      contact: {
+        phone: "+54 351 xxxx-xxxx",
+        email: "info@edenentradas.com.ar",
+        website: "www.edenentradas.ar",
+        name: "Eden Entradas",
+        img: "",
+        social: {
+          instagram: "edenentradas"
+        }
+      },
+      availability: {
+        timezone: "America/Argentina/Buenos_Aires",
+        date_start: "2026-01-01T00:00:00.000Z",
+        date_end: "2026-03-08T21:00:00.000Z"
+      },
+      beneficiary: {
+        phone: "+54 351 xxxx-xxxx",
+        email: "info@edenentradas.com.ar",
+        website: "www.edenentradas.ar",
+        name: "Eden Entradas",
+        img: "",
+        social: {
+          instagram: "edenentradas"
+        }
+      }
+    },
+    detail: {
+      venue: "Estadio Mario A. Kempes",
+      address: "Av. Cárcano s/n, Córdoba",
+      capacity: 57000,
+      price_zones: {
+        vip: 95000,
+        platea: 75000,
+        campo: 65000
+      }
+    },
+    date_created: "2026-02-01T10:00:00.000Z",
+    last_updated: "2026-02-15T14:30:00.000Z"
+  },
+  {
+    _id: "65f1a2b3c4d5e6f7a8b9e002",
+    is_active: true,
+    is_verified: true,
+    views: 2150,
+    scope: "PUBLIC",
+    status: "APPROVED",
+    status_reason: "APPROVED",
+    type: "concert",
+    title: "Dream Theater",
+    subtitle: "Tour Sudamericano",
+    media: {
+      imgs: [
+        "https://cdn.getcrowder.com/images/7ed41a5f-1c5b-415f-9339-849d70eeef51-dteden-1920x7201.jpg",
+        "https://cdn.getcrowder.com/images/12a08468-658f-446b-b534-ce1b4eeab719-dteden-640x640.png"
+      ],
+      videos: [],
+      url: "https://www.edenentradas.ar/"
+    },
+    description: "La legendaria banda de metal progresivo, Dream Theater, regresa a la ciudad de Córdoba. Prometen un concierto épico lleno de virtuosismo técnico repasando sus discos clásicos y sus temas más recientes.",
+    tags: ["concert", "dream theater", "metal", "progresivo", "rock"],
+    owner_id: "65f1a2b3c4d5e6f7a8b9c000",
+    location_id: "65f1a2b3c4d5e6f7a8b9c777",
+    schedule: {
+      timezone: "America/Argentina/Buenos_Aires",
+      date_start: "2026-04-26T23:00:00.000Z",
+      date_end: "2026-04-27T02:00:00.000Z"
+    },
+    ticket: {
+      access: "PAID",
+      currency: "ARS",
+      amount: 80000,
+      url: "https://www.edenentradas.ar/",
+      contact: {
+        phone: "+54 351 xxxx-xxxx",
+        email: "info@edenentradas.com.ar",
+        website: "www.edenentradas.ar",
+        name: "Eden Entradas",
+        img: "https://cdn.getcrowder.com/images/fae2a138-9ae8-4d77-b617-7a6d155a3366-edenlight.png?w=300",
+        social: {
+          instagram: "edenentradas"
+        }
+      },
+      availability: {
+        timezone: "America/Argentina/Buenos_Aires",
+        date_start: "2026-01-15T00:00:00.000Z",
+        date_end: "2026-04-26T20:00:00.000Z"
+      },
+      beneficiary: {
+        phone: "+54 351 xxxx-xxxx",
+        email: "info@edenentradas.com.ar",
+        website: "www.edenentradas.ar",
+        name: "Eden Entradas",
+        img: "",
+        social: {
+          instagram: "edenentradas"
+        }
+      }
+    },
+    detail: {
+      venue: "Plaza de la Música",
+      address: "Int. Ramón Bautista Mestre 1129, Córdoba",
+      capacity: 6000,
+      price_zones: {
+        platea: 80000,
+        campo: 60000
+      }
+    },
+    date_created: "2026-02-10T10:00:00.000Z",
+    last_updated: "2026-02-15T14:30:00.000Z"
+  },
+  {
+    _id: "65f1a2b3c4d5e6f7a8b9e003",
+    is_active: true,
+    is_verified: true,
+    views: 1890,
+    scope: "PUBLIC",
+    status: "APPROVED",
+    status_reason: "APPROVED",
+    type: "concert",
+    title: "Robert Plant",
+    subtitle: "El ícono de la música en vivo",
+    media: {
+      imgs: [
+         "https://cdn.getcrowder.com/images/bce5322b-ecf4-4a8f-a5b0-d58f8808e1b1-robertplant-cordoba-anuncio-1920x720px-copia.jpg",
+         "https://cdn.getcrowder.com/images/4d4df104-2491-4089-a7e0-8279c2bf45d8-robertplant-cordoba-anuncio-640x640-px.png?w=360"
+      ],
+      videos: [],
+      url: "https://www.edenentradas.ar/"
+    },
+    description: "Una leyenda viva del rock mundial se presenta en Córdoba. Robert Plant, el histórico cantante de Led Zeppelin, brindará un show íntimo y potente recorriendo las grandes joyas de su carrera.",
+    tags: ["concert", "robert plant", "rock", "led zeppelin", "leyenda"],
+    owner_id: "65f1a2b3c4d5e6f7a8b9c000",
+    location_id: "65f1a2b3c4d5e6f7a8b9c888",
+    schedule: {
+      timezone: "America/Argentina/Buenos_Aires",
+      date_start: "2026-05-14T23:00:00.000Z",
+      date_end: "2026-05-15T02:00:00.000Z"
+    },
+    ticket: {
+      access: "PAID",
+      currency: "ARS",
+      amount: 110000,
+      url: "https://www.edenentradas.ar/",
+      contact: {
+        phone: "+54 351 xxxx-xxxx",
+        email: "info@edenentradas.com.ar",
+        website: "www.edenentradas.ar",
+        name: "Eden Entradas",
+        img: "https://cdn.getcrowder.com/images/fae2a138-9ae8-4d77-b617-7a6d155a3366-edenlight.png?w=300",
+        social: {
+          instagram: "edenentradas"
+        }
+      },
+      availability: {
+        timezone: "America/Argentina/Buenos_Aires",
+        date_start: "2026-02-01T00:00:00.000Z",
+        date_end: "2026-05-14T20:00:00.000Z"
+      },
+      beneficiary: {
+        phone: "+54 351 xxxx-xxxx",
+        email: "info@edenentradas.com.ar",
+        website: "www.edenentradas.ar",
+        name: "Eden Entradas",
+        img: "https://cdn.getcrowder.com/images/fae2a138-9ae8-4d77-b617-7a6d155a3366-edenlight.png?w=300",
+        social: {
+          instagram: "edenentradas"
+        }
+      }
+    },
+    detail: {
+      venue: "Plaza de la Música",
+      address: "Int. Ramón Bautista Mestre 1129, Córdoba",
+      capacity: 6000,
+      price_zones: {
+        platea_preferencial: 110000,
+        campo_vip: 90000,
+        campo: 70000
+      }
+    },
+    date_created: "2026-02-15T10:00:00.000Z",
+    last_updated: "2026-02-20T14:30:00.000Z"
   }
 ];
 

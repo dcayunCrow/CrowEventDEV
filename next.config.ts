@@ -30,6 +30,11 @@ const nextConfig: NextConfig = {
         hostname: 'paseshow-img.s3.sa-east-1.amazonaws.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.getcrowder.com',
+        pathname: '/**',
+      },
     ],
   },
 };
