@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { LuChevronRight } from 'react-icons/lu';
+import EventCardCompact from '@/components/EventCardCompact';
 import styles from './RecommendedEventRow.module.scss';
 
 export interface EventItem {
@@ -56,59 +56,17 @@ export default function RecommendedEventRow({
       </div>
 
       <div className={styles.rowScrollArea}>
-        {events.map((event) => {
-          
-          // Si tiene imagen, renderizamos la card normal
-          if (event.imageUrl) {
-            return (
-              <div 
-                key={event.eventId} 
-                className={`${styles.cardItem} ${styles.cardImage}`}
-                onClick={() => handleEventClick(event.eventId)}
-                aria-label={`Ver evento ${event.title || event.eventId}`}
-              >
-                <Image
-                  src={event.imageUrl}
-                  alt=""
-                  fill
-                  className={styles.imageBackdrop}
-                  sizes="9.25rem"
-                />
-                <Image
-                  src={event.imageUrl}
-                  alt={event.title || 'Evento'}
-                  fill
-                  className={styles.eventImage}
-                  sizes="9.25rem"
-                />
-              </div>
-            );
-          }
-
-          // Si NO tiene imagen, usamos las propiedades del mock para el fallback
-          return (
-            <div 
-              key={event.eventId} 
-              className={`${styles.cardItem} ${styles.cardFallback}`}
-              onClick={() => handleEventClick(event.eventId)}
-            >
-              <div className={styles.logoContainer}>
-                <Image
-                  src="/logos/crow.svg"
-                  alt="Crow Logo"
-                  width={60}
-                  height={60}
-                  className={styles.placeholderLogo}
-                />
-              </div>
-              <div className={styles.textContent}>
-                <p className={styles.eventVenue}>{event.venue || 'Lugar por definir'}</p>
-                <p className={styles.eventTitle}>{event.title || 'Nombre de evento'}</p>
-                <p className={styles.eventDate}>{event.date || 'Fecha a confirmar'}</p>
-              </div>
-            </div>
-          );
-        })}
+        {events.map((event) => (
+          <EventCardCompact
+            key={event.eventId}
+            eventId={event.eventId}
+            imageUrl={event.imageUrl}
+            title={event.title}
+            venue={event.venue}
+            date={event.date}
+            onClick={handleEventClick}
+          />
+        ))}
       </div>
       
     </div>

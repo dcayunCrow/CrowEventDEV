@@ -12,6 +12,7 @@ export default function ExplorePage() {
         {categories.map((category) => (
           <ExploreCard
             key={category.id}
+            categoryId={category.id}
             title={category.title}
             imageUrl={category.imageUrl}
           />

@@ -1,8 +1,40 @@
+import type { Event, EventType } from '@/types/event';
+
 export interface Category {
   id: string;
   title: string;
   imageUrl: string;
 }
+
+// Mapeo de categoría → tipos de evento y/o tags para filtrar el mock
+// (se reemplaza por llamada al endpoint cuando esté disponible)
+interface CategoryFilter {
+  types?: EventType[];
+  tags?: string[];
+}
+
+const categoryFilterMap: Record<string, CategoryFilter> = {
+  'recitales':            { types: ['concert'], tags: ['concert', 'music', 'rock', 'pop', 'ska', 'metal', 'tribute'] },
+  'deportes':             { types: ['race', 'sports'], tags: ['sports', 'running', 'marathon', 'deporte'] },
+  'infantiles':           { tags: ['infantil'] },
+  'para-la-familia':      { tags: ['familia', 'infantil', 'kids'] },
+  'fiestas-disco':        { tags: ['fiesta', 'fiesta', 'reggaeton', 'trap', 'música urbana'] },
+  'teatro':               { types: ['other'], tags: ['teatro', 'theater', 'obra', 'musical'] },
+  'stand-up':             { tags: ['stand-up', 'comedia', 'humor'] },
+  'festivales':           { types: ['festival'], tags: ['festival'] },
+  'exposiciones':         { tags: ['exposición', 'feria', 'expo'] },
+  'gastronomia':          { tags: ['gastronomía', 'food', 'wine', 'cata'] },
+  'conferencias':         { types: ['conference'], tags: ['conferencia', 'charla', 'keynote'] },
+  'cultural':             { tags: ['cultural', 'arte', 'cultura'] },
+  'folklore':             { tags: ['folklore', 'folclore', 'tango', 'música argentina'] },
+  'gaming-y-esports':     { tags: ['gaming', 'esports', 'videojuegos'] },
+  'workshops-y-talleres': { types: ['workshop'], tags: ['workshop', 'taller', 'curso'] },
+  'cine-y-autocine':      { tags: ['cine', 'película', 'film', 'autocine'] },
+  'aire-libre-y-aventura':{ tags: ['outdoor', 'aventura', 'aire libre', 'naturaleza'] },
+  'moda-y-diseño':        { tags: ['moda', 'diseño', 'fashion'] },
+  'tecnologia-y-ciencia': { tags: ['tecnología', 'ciencia', 'tech', 'innovación'] },
+  'vinos-y-catas':        { tags: ['vinos', 'cata', 'wine', 'sommelier'] },
+};
 
 export const mockCategories: Category[] = [
   {
@@ -118,4 +150,21 @@ export function getCategoryById(id: string): Category | undefined {
 
 export function getAllCategories(): Category[] {
   return mockCategories;
+}
+
+/**
+ * Filtra eventos del mock por categoría.
+ * TODO: reemplazar por llamada al endpoint GET /events?category={id}
+ */
+export function getEventsByCategory(categoryId: string, events: Event[]): Event[] {
+  const filter = categoryFilterMap[categoryId];
+  if (!filter) return [];
+
+  return events.filter((event) => {
+    const typeMatch = filter.types?.includes(event.type) ?? false;
+    const tagMatch = filter.tags?.some(tag =>
+      event.tags.some(t => t.toLowerCase().includes(tag.toLowerCase()))
+    ) ?? false;
+    return typeMatch || tagMatch;
+  });
 }

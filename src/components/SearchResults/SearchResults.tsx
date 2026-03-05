@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import SearchResultCard from '../SearchResultCard';
+import EventCardHorizontal from '../EventCardHorizontal';
 import { Event } from '@/types/event';
 import styles from './SearchResults.module.scss';
 
@@ -42,7 +42,7 @@ export default function SearchResults({ searchQuery, events }: SearchResultsProp
             });
 
             return (
-              <SearchResultCard
+              <EventCardHorizontal
                 key={evento._id}
                 eventId={evento._id}
                 imageUrl={evento.media.imgs[0]}

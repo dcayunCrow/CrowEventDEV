@@ -2,20 +2,24 @@
 
 import React from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import styles from './ExploreCard.module.scss';
 
 export interface ExploreCardProps {
+  categoryId: string;
   title: string;
   imageUrl: string;
   onClick?: () => void;
 }
 
-export default function ExploreCard({ title, imageUrl, onClick }: ExploreCardProps) {
+export default function ExploreCard({ categoryId, title, imageUrl, onClick }: ExploreCardProps) {
+  const router = useRouter();
+
   const handleClick = () => {
     if (onClick) {
       onClick();
     } else {
-      console.log(`Navegando a categoría: ${title}`);
+      router.push(`/explore/${categoryId}`);
     }
   };
 
