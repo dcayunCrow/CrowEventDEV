@@ -12,57 +12,6 @@
   width: 100%;
 }
 
-// ----------------------------------------
-// Hero
-// ----------------------------------------
-
-.hero {
-  position: relative;
-  width: 100%;
-  height: 12rem;
-  border-radius: $radius-crow;
-  overflow: hidden;
-
-  @include respond-to('md') {
-    height: 16rem;
-  }
-
-  @include respond-to('lg') {
-    height: 20rem;
-  }
-}
-
-.heroImage {
-  object-fit: cover;
-  object-position: center;
-}
-
-.heroOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba($color-black, 0.75) 0%,
-    rgba($color-black, 0.2) 60%,
-    transparent 100%
-  );
-  z-index: 1;
-}
-
-.heroContent {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 1.5rem;
-  right: 1.5rem;
-  z-index: 2;
-}
-
-.categoryTitle {
-  @include text-h1;
-  color: $color-text-primary;
-  margin: 0;
-  text-shadow: $shadow-banner-text;
-}
 
 // ----------------------------------------
 // Events Section
@@ -72,12 +21,6 @@
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-}
-
-.sectionTitle {
-  @include text-h2;
-  color: $color-text-primary;
-  margin: 0;
 }
 
 .eventsGrid {
@@ -99,6 +42,28 @@
     height: auto !important;
     aspect-ratio: 1 / 1;
   }
+}
+
+// ── Vista: Tarjetas (EventCard, 1-2 columnas) ─────────────────────────────────
+.eventsCards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+
+  @include respond-to('sm') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to('md') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// ── Vista: Lista (horizontal, full-width) ─────────────────────────────────────
+.eventsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 // ----------------------------------------

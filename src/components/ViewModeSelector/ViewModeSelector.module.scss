@@ -1,0 +1,94 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+// ── Trigger button (en el Navbar bottomRow) ──────────────────────────────────
+.triggerButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: $color-text-primary;
+  padding: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  @include transition-fast;
+
+  &:hover {
+    color: $color-brand-primary;
+  }
+
+  svg {
+    display: block;
+  }
+}
+
+// ── Dropdown flotante ─────────────────────────────────────────────────────────
+.dropdown {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px 12px;
+  gap: 12px;
+
+  background: $color-bg-menu;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba($color-black, 0.4);
+  z-index: 2000;
+
+  // Pequeño triángulo superior-derecho (opcional decorativo)
+  &::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 8px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid $color-bg-menu;
+  }
+}
+
+// ── Cada opción del menú ──────────────────────────────────────────────────────
+.modeBtn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: $color-text-secondary;
+  @include transition-fast;
+  white-space: nowrap;
+
+  span {
+    @include text-paragraph;
+    font-weight: $font-weight-regular;
+    margin: 0;
+  }
+
+  svg {
+    flex-shrink: 0;
+    display: block;
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &.active {
+    color: $color-brand-primary;
+
+    span {
+      font-weight: $font-weight-semibold;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
