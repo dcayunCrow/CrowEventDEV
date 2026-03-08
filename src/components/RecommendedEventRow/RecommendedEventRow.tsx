@@ -4,6 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { LuChevronRight } from 'react-icons/lu';
 import EventCardCompact from '@/components/EventCardCompact';
+import { slugify } from '@/data/mockRecommendedEvents';
 import styles from './RecommendedEventRow.module.scss';
 
 export interface EventItem {
@@ -16,13 +17,16 @@ export interface EventItem {
 
 export interface RecommendedEventRowProps {
   rowTitle: string;
+  /** Slug para la URL. Si no se pasa, se genera automáticamente desde rowTitle */
+  rowId?: string;
   events: EventItem[];
   onViewAllClick?: () => void;
   onEventClick?: (eventId: string) => void;
 }
 
 export default function RecommendedEventRow({ 
-  rowTitle, 
+  rowTitle,
+  rowId,
   events, 
   onViewAllClick,
   onEventClick 
@@ -33,7 +37,8 @@ export default function RecommendedEventRow({
     if (onViewAllClick) {
       onViewAllClick();
     } else {
-      console.log('Ver todos:', rowTitle);
+      const id = rowId ?? slugify(rowTitle);
+      router.push(`/feed/${id}?title=${encodeURIComponent(rowTitle)}`);
     }
   };
 

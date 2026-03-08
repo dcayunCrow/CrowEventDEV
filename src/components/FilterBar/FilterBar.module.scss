@@ -1,0 +1,20 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.filterBar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  width: calc(100% + 1.5rem);
+  padding-right: 1.5rem;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

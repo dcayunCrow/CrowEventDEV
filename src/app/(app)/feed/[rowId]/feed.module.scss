@@ -1,21 +1,12 @@
 @use "../../../../styles/variables" as *;
 @use "../../../../styles/mixins" as *;
 
-// ----------------------------------------
-// Category Page
-// ----------------------------------------
-
-.categoryPage {
+.feedPage {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   width: 100%;
 }
-
-
-// ----------------------------------------
-// Events Section
-// ----------------------------------------
 
 .eventsSection {
   display: flex;

@@ -420,3 +420,22 @@ export const getRecommendedListByTitle = (title: string): RecommendedEventsList 
 export const getAllRecommendedEvents = (): RecommendedEvent[] => {
   return mockRecommendedEvents.flatMap(list => list.events);
 };
+
+/**
+ * Convierte un string en un slug URL-friendly
+ */
+export function slugify(str: string): string {
+  return str
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+/**
+ * Obtiene una lista específica por su rowId (slug generado desde el título)
+ */
+export const getRecommendedListByRowId = (rowId: string): RecommendedEventsList | undefined => {
+  return mockRecommendedEvents.find(list => slugify(list.title) === rowId);
+};

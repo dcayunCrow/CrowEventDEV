@@ -9,8 +9,10 @@ import NavbarMenu from '../NavbarMenu';
 import Overlay from '../Overlay';
 import SearchBar from '../SearchBar';
 import ViewModeSelector from '../ViewModeSelector';
+import FilterBar from '../FilterBar';
 import { useSearch } from '@/contexts/SearchContext';
 import { getCategoryById } from '@/data/mockCategories';
+import { getRecommendedListByRowId } from '@/data/mockRecommendedEvents';
 import styles from './Navbar.module.scss';
 
 export default function Navbar() {
@@ -23,11 +25,20 @@ export default function Navbar() {
   // Detectar variante de navbar
   const isExplorePage = pathname === '/explore';
   const isCategoryPage = pathname.startsWith('/explore/') && pathname !== '/explore';
+  const isFeedPage = pathname.startsWith('/feed/');
 
   const categoryId = isCategoryPage ? pathname.replace('/explore/', '') : null;
   const category = categoryId ? getCategoryById(categoryId) : null;
-  const pageTitle = isExplorePage ? 'Explorar' : (category?.title ?? 'Categoría');
-  const backDestination = isExplorePage ? '/home' : '/explore';
+
+  const feedRowId = isFeedPage ? pathname.replace('/feed/', '') : null;
+  const feedList = feedRowId ? getRecommendedListByRowId(feedRowId) : null;
+
+  const pageTitle = isExplorePage
+    ? 'Explorar'
+    : isFeedPage
+    ? (feedList?.title ?? 'Recomendados')
+    : (category?.title ?? 'Categoría');
+  const backDestination = (isExplorePage || isFeedPage) ? '/home' : '/explore';
 
   const handleMenuToggle = () => setIsMenuOpen(!isMenuOpen);
   const handleMenuClose = () => setIsMenuOpen(false);
@@ -39,11 +50,11 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`${styles.navbar} ${(isExplorePage || isCategoryPage) ? styles.navbarExplore : ''}`}>
+      <nav className={`${styles.navbar}`}>
 
         {isExplorePage ? (
           // ── /explore: dos filas sin buscador ──
-          <div className={styles.navbarExploreContent}>
+          <div className={styles.navbarContent}>
             <div className={styles.topRow}>
               <div className={styles.logo} onClick={handleLogoClick}>
                 <Image src="/logos/crow.svg" alt="Crow Logo" width={29} height={29} />
@@ -60,9 +71,29 @@ export default function Navbar() {
             </div>
           </div>
 
+        ) : isFeedPage ? (
+          // ── /feed/[rowId]: dos filas sin buscador + ViewModeSelector ──
+          <div className={styles.navbarContent}>
+            <div className={styles.topRow}>
+              <div className={styles.logo} onClick={handleLogoClick}>
+                <Image src="/logos/crow.svg" alt="Crow Logo" width={29} height={29} />
+              </div>
+              <button className={styles.menuButton} onClick={handleMenuToggle} aria-label="Abrir menú">
+                <MdMenu size={28} />
+              </button>
+            </div>
+            <div className={styles.bottomRow}>
+              <button className={styles.backButton} onClick={() => router.push(backDestination)} aria-label="Volver">
+                <LuArrowLeft size={24} strokeWidth={2.5} />
+              </button>
+              <h1 className={styles.pageTitle}>{pageTitle}</h1>
+              <ViewModeSelector />
+            </div>
+          </div>
+
         ) : isCategoryPage ? (
           // ── /explore/[id]: dos filas CON buscador ──
-          <div className={styles.navbarExploreContent}>
+          <div className={styles.navbarContent}>
             <div className={styles.topRow}>
               <div className={styles.logo} onClick={handleLogoClick}>
                 <Image src="/logos/crow.svg" alt="Crow Logo" width={29} height={29} />
@@ -84,13 +115,16 @@ export default function Navbar() {
         ) : (
           // ── Default (home / resto) ──
           <div className={styles.navbarContent}>
-            <div className={styles.logo} onClick={handleLogoClick}>
-              <Image src="/logos/crow.svg" alt="Crow Logo" width={29} height={29} />
+            <div className={styles.topRow}>
+              <div className={styles.logo} onClick={handleLogoClick}>
+                <Image src="/logos/crow.svg" alt="Crow Logo" width={29} height={29} />
+              </div>
+              <SearchBar variant="default" onExploreClick={handleExploreClick} />
+              <button className={styles.menuButton} onClick={handleMenuToggle} aria-label="Abrir menú">
+                <MdMenu size={28} />
+              </button>
             </div>
-            <SearchBar variant="default" onExploreClick={handleExploreClick} />
-            <button className={styles.menuButton} onClick={handleMenuToggle} aria-label="Abrir menú">
-              <MdMenu size={28} />
-            </button>
+            <FilterBar />
           </div>
         )}
 

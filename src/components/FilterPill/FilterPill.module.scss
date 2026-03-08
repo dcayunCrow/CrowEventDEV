@@ -1,0 +1,44 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.pill {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  gap: 10px;
+  height: 32px;
+  flex: none;
+  background: transparent;
+  border: 1px solid $color-text-secondary;
+  border-radius: $radius-crow;
+  cursor: pointer;
+  color: $color-text-secondary;
+  @include transition-fast;
+
+  span {
+    font-family: $font-primary;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-sm;
+    line-height: 0;
+    white-space: nowrap;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  // ── selected: gris ────────────────────────────────────────────────────────
+  &.statusSelected {
+    background: $color-tag-fill;
+    border-color: $color-text-secondary;
+  }
+
+  // ── active: rojo (modal abierto) ──────────────────────────────────────────
+  &.statusActive {
+    background: $color-brand-primary;
+    border-color: $color-text-secondary;
+  }
+}

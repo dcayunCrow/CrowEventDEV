@@ -1,0 +1,62 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+// ── Vista: Grilla (cuadrada) ──────────────────────────────────────────────────
+.eventsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+
+  @include respond-to('sm') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include respond-to('md') {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  > * {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1;
+  }
+}
+
+// ── Vista: Tarjetas (EventCard, portrait) ────────────────────────────────────
+.eventsCards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+
+  @include respond-to('sm') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to('md') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// ── Vista: Lista (horizontal) ─────────────────────────────────────────────────
+.eventsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+// ── Empty State ───────────────────────────────────────────────────────────────
+.emptyState {
+  @include flex-center;
+  width: 100%;
+  padding: 4rem 1rem;
+  border-radius: $radius-crow;
+  background: rgba($color-white, 0.04);
+  border: 1px solid rgba($color-white, 0.08);
+}
+
+.emptyText {
+  @include text-paragraph;
+  color: $color-text-placeholder;
+  text-align: center;
+  margin: 0;
+}

@@ -2,33 +2,23 @@
 
 import { useEffect, useMemo } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { getCategoryById, getEventsByCategory } from '@/data/mockCategories';
-import type { Category } from '@/data/mockCategories';
-import { mockEvents } from '@/data/mockEvents';
+import { getRecommendedListByRowId } from '@/data/mockRecommendedEvents';
 import EventsGrid, { EventGridItem } from '@/components/EventsGrid';
-import styles from './category.module.scss';
+import styles from './feed.module.scss';
 
-export default function CategoryPage() {
+export default function FeedPage() {
   const params = useParams();
   const router = useRouter();
-  const id = params.id as string;
+  const rowId = params.rowId as string;
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const category: Category | undefined = useMemo(
-    () => getCategoryById(id),
-    [id]
-  );
-
-  const events = useMemo(
-    () => category ? getEventsByCategory(id, mockEvents) : [],
-    [id, category]
-  );
+  const list = useMemo(() => getRecommendedListByRowId(rowId), [rowId]);
 
   const gridEvents = useMemo<EventGridItem[]>(() =>
-    events.map((event) => ({
+    (list?.events ?? []).map((event) => ({
       id: event._id,
       imageUrl: event.media.imgs[0],
       title: event.title,
@@ -39,22 +29,20 @@ export default function CategoryPage() {
         year: 'numeric',
       }),
     })),
-    [events]
+    [list]
   );
 
-  if (!category) {
-    router.replace('/explore');
+  if (!list) {
+    router.replace('/home');
     return null;
   }
 
-  // TODO: reemplazar events por: await fetchEventsByCategory(category.id)
-
   return (
-    <div className={styles.categoryPage}>
+    <div className={styles.feedPage}>
       <section className={styles.eventsSection}>
         <EventsGrid
           events={gridEvents}
-          emptyText="No hay eventos disponibles en esta categoría por el momento"
+          emptyText="No hay eventos disponibles en esta sección por el momento"
         />
       </section>
     </div>
