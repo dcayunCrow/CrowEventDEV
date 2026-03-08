@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { SearchProvider } from '@/contexts/SearchContext';
@@ -13,7 +14,9 @@ export default function AppLayout({
     <SearchProvider>
     <ViewModeProvider>
       <div className={styles.appLayout}>
-        <Navbar />
+        <Suspense fallback={null}>
+          <Navbar />
+        </Suspense>
         <main className={styles.appMain}>
           {children}
         </main>
