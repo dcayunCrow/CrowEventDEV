@@ -7,6 +7,7 @@ import { LuEllipsisVertical } from 'react-icons/lu';
 import { createPortal } from 'react-dom';
 import EventCardMenu from '../EventCardMenu';
 import Overlay from '../Overlay';
+import { formatEventDate } from '@/utils/dateUtils';
 import styles from './EventCardHorizontal.module.scss';
 
 export interface EventCardHorizontalProps {
@@ -87,7 +88,7 @@ export default function EventCardHorizontal({
         {/* Info */}
         <div className={styles.cardInfo}>
           <h4 className={styles.eventTitle} title={title}>{title}</h4>
-          <p className={styles.eventDate}>{date}</p>
+          <p className={styles.eventDate}>{formatEventDate(date)}</p>
           <p className={styles.eventVenue}>{venue}</p>
         </div>
 

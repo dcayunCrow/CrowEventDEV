@@ -33,25 +33,16 @@ export default function SearchResults({ searchQuery, events }: SearchResultsProp
 
       {filteredEvents.length > 0 ? (
         <div className={styles.resultsGrid}>
-          {filteredEvents.map((evento) => {
-            const eventDate = new Date(evento.schedule.date_start);
-            const formattedDate = eventDate.toLocaleDateString('es-AR', {
-              day: '2-digit',
-              month: 'short',
-              year: 'numeric'
-            });
-
-            return (
-              <EventCardHorizontal
-                key={evento._id}
-                eventId={evento._id}
-                imageUrl={evento.media.imgs[0]}
-                title={evento.title}
-                date={formattedDate}
-                venue={evento.detail?.venue || evento.detail?.address || 'Ubicación por confirmar'}
-              />
-            );
-          })}
+          {filteredEvents.map((evento) => (
+            <EventCardHorizontal
+              key={evento._id}
+              eventId={evento._id}
+              imageUrl={evento.media.imgs[0]}
+              title={evento.title}
+              date={evento.schedule.date_start}
+              venue={evento.detail?.venue || evento.detail?.address || 'Ubicación por confirmar'}
+            />
+          ))}
         </div>
       ) : (
         <div className={styles.noResults}>

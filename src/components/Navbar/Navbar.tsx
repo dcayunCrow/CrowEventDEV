@@ -1,15 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
-import { LuArrowLeft } from 'react-icons/lu';
+import { LuArrowLeft, LuBookmark, LuShare2 } from 'react-icons/lu';
 import { MdMenu } from 'react-icons/md';
 import NavbarMenu from '../NavbarMenu';
 import Overlay from '../Overlay';
 import SearchBar from '../SearchBar';
 import ViewModeSelector from '../ViewModeSelector';
 import FilterBar from '../FilterBar';
+import ActivityTabs from '../ActivityTabs';
+import type { ActivityTab } from '../ActivityTabs';
 import { useSearch } from '@/contexts/SearchContext';
 import { getCategoryById } from '@/data/mockCategories';
 import { getRecommendedListByRowId } from '@/data/mockRecommendedEvents';
@@ -26,6 +28,11 @@ export default function Navbar() {
   const isExplorePage = pathname === '/explore';
   const isCategoryPage = pathname.startsWith('/explore/') && pathname !== '/explore';
   const isFeedPage = pathname.startsWith('/feed/');
+  const isEventPage = pathname.startsWith('/event/');
+  const isActivityPage = pathname === '/activity';
+
+  const searchParams = useSearchParams();
+  const activeTab = isActivityPage ? (searchParams.get('tab') ?? 'likes') : null;
 
   const categoryId = isCategoryPage ? pathname.replace('/explore/', '') : null;
   const category = categoryId ? getCategoryById(categoryId) : null;
@@ -40,6 +47,18 @@ export default function Navbar() {
     : (category?.title ?? 'Categoría');
   const backDestination = (isExplorePage || isFeedPage) ? '/home' : '/explore';
 
+  const handleBookmark = () => {
+    // TODO: conectar con lógica de guardado
+  };
+
+  const handleShare = async () => {
+    try {
+      await navigator.share({ url: window.location.href });
+    } catch {
+      await navigator.clipboard.writeText(window.location.href);
+    }
+  };
+
   const handleMenuToggle = () => setIsMenuOpen(!isMenuOpen);
   const handleMenuClose = () => setIsMenuOpen(false);
   const handleExploreClick = () => router.push('/explore');
@@ -52,7 +71,48 @@ export default function Navbar() {
     <>
       <nav className={`${styles.navbar}`}>
 
-        {isExplorePage ? (
+        {isEventPage ? (
+          // ── /event/[id]: dos filas — logo+menu | back + bookmark + share ──
+          <div className={styles.navbarContent}>
+            <div className={styles.topRow}>
+              <div className={styles.logo} onClick={handleLogoClick}>
+                <Image src="/logos/crow.svg" alt="Crow Logo" width={29} height={29} />
+              </div>
+              <button className={styles.menuButton} onClick={handleMenuToggle} aria-label="Abrir menú">
+                <MdMenu size={28} />
+              </button>
+            </div>
+            <div className={styles.bottomRow}>
+              <button className={styles.backButton} onClick={() => router.back()} aria-label="Volver">
+                <LuArrowLeft size={20} strokeWidth={2.5} />
+              </button>
+              <div className={styles.eventActions}>
+                <button className={styles.actionButton} onClick={handleBookmark} aria-label="Guardar evento">
+                  <LuBookmark size={20} strokeWidth={2} />
+                </button>
+                <button className={styles.actionButton} onClick={handleShare} aria-label="Compartir evento">
+                  <LuShare2 size={20} strokeWidth={2} />
+                </button>
+              </div>
+            </div>
+          </div>
+
+        ) : isActivityPage ? (
+          // ── /activity: logo+título centrado+menu | 4 tabs ──
+          <div className={styles.navbarContent}>
+            <div className={styles.topRowActivity}>
+              <div className={styles.logo} onClick={handleLogoClick}>
+                <Image src="/logos/crow.svg" alt="Crow Logo" width={29} height={29} />
+              </div>
+              <h1 className={styles.activityTitle}>Mi Actividad</h1>
+              <button className={styles.menuButton} onClick={handleMenuToggle} aria-label="Abrir menú">
+                <MdMenu size={28} />
+              </button>
+            </div>
+            <ActivityTabs activeTab={(activeTab as ActivityTab) ?? 'likes'} />
+          </div>
+
+        ) : isExplorePage ? (
           // ── /explore: dos filas sin buscador ──
           <div className={styles.navbarContent}>
             <div className={styles.topRow}>
@@ -65,7 +125,7 @@ export default function Navbar() {
             </div>
             <div className={styles.bottomRow}>
               <button className={styles.backButton} onClick={() => router.push(backDestination)} aria-label="Volver">
-                <LuArrowLeft size={24} strokeWidth={2.5} />
+                <LuArrowLeft size={20} strokeWidth={2.5} />
               </button>
               <h1 className={styles.pageTitle}>{pageTitle}</h1>
             </div>
@@ -84,7 +144,7 @@ export default function Navbar() {
             </div>
             <div className={styles.bottomRow}>
               <button className={styles.backButton} onClick={() => router.push(backDestination)} aria-label="Volver">
-                <LuArrowLeft size={24} strokeWidth={2.5} />
+                <LuArrowLeft size={20} strokeWidth={2.5} />
               </button>
               <h1 className={styles.pageTitle}>{pageTitle}</h1>
               <ViewModeSelector />
@@ -105,7 +165,7 @@ export default function Navbar() {
             </div>
             <div className={styles.bottomRow}>
               <button className={styles.backButton} onClick={() => router.push(backDestination)} aria-label="Volver">
-                <LuArrowLeft size={24} strokeWidth={2.5} />
+                <LuArrowLeft size={20} strokeWidth={2.5} />
               </button>
               <h1 className={styles.pageTitle}>{pageTitle}</h1>
               <ViewModeSelector />

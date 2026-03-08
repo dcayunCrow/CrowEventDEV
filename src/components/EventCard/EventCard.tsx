@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { LuHeart, LuMap, LuEllipsisVertical } from 'react-icons/lu';
 import EventCardMenu from '../EventCardMenu';
 import Overlay from '../Overlay';
+import { formatEventDate } from '@/utils/dateUtils';
 import styles from './EventCard.module.scss';
 
 interface EventCardProps {
@@ -94,7 +95,7 @@ const EventCard: React.FC<EventCardProps> = ({
         <div className={styles.header}>
           <div className={styles.textContent}>
             <h3 className={styles.title}>{title}</h3>
-            <p className={styles.datetime}>{date}</p>
+            <p className={styles.datetime}>{formatEventDate(date)}</p>
           </div>
           
           <button 

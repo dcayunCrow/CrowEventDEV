@@ -63,7 +63,7 @@ export default function ViewModeSelector() {
         aria-label="Cambiar vista"
         aria-expanded={isOpen}
       >
-        <CurrentIcon size={22} strokeWidth={2} />
+        <CurrentIcon size={20} strokeWidth={2} />
       </button>
 
       {isOpen &&

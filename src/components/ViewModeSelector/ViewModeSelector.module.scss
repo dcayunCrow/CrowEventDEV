@@ -11,8 +11,8 @@
   cursor: pointer;
   color: $color-text-primary;
   padding: 0;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
   flex-shrink: 0;
   @include transition-fast;
 
@@ -35,7 +35,7 @@
   gap: 12px;
 
   background: $color-bg-menu;
-  border-radius: 8px;
+  border-radius: $radius-crow;
   box-shadow: 0px 4px 12px rgba($color-black, 0.4);
   z-index: 2000;
 

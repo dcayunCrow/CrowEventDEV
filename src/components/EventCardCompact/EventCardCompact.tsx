@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { formatEventDate } from '@/utils/dateUtils';
 import styles from './EventCardCompact.module.scss';
 
 export interface EventCardCompactProps {
@@ -75,7 +76,7 @@ export default function EventCardCompact({
       <div className={styles.textContent}>
         <p className={styles.eventVenue}>{venue || 'Lugar por definir'}</p>
         <p className={styles.eventTitle}>{title || 'Nombre de evento'}</p>
-        <p className={styles.eventDate}>{date || 'Fecha a confirmar'}</p>
+        <p className={styles.eventDate}>{date ? formatEventDate(date) : 'Fecha a confirmar'}</p>
       </div>
     </div>
   );

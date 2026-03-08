@@ -33,11 +33,7 @@ export default function CategoryPage() {
       imageUrl: event.media.imgs[0],
       title: event.title,
       venue: event.detail?.venue || event.detail?.address || 'Ubicación por confirmar',
-      date: new Date(event.schedule.date_start).toLocaleDateString('es-AR', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric',
-      }),
+      date: event.schedule.date_start,
     })),
     [events]
   );

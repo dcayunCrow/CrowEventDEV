@@ -17,22 +17,13 @@ export default function HomePage() {
   const recommendedList = getRecommendedListByTitle('Creemos que estos te van a encantar');
   
   // Mapear los datos al formato que espera el componente
-  const recommendedEvents = recommendedList?.events.map((evento) => {
-    const eventDate = new Date(evento.schedule.date_start);
-    const formattedDate = eventDate.toLocaleDateString('es-AR', {
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric'
-    });
-
-    return {
-      eventId: evento._id,
-      imageUrl: evento.media.imgs[0],
-      title: evento.title,
-      venue: evento.detail.venue || evento.detail.address || 'Ubicación por confirmar',
-      date: formattedDate
-    };
-  }) || [];
+  const recommendedEvents = recommendedList?.events.map((evento) => ({
+    eventId: evento._id,
+    imageUrl: evento.media.imgs[0],
+    title: evento.title,
+    venue: evento.detail.venue || evento.detail.address || 'Ubicación por confirmar',
+    date: evento.schedule.date_start,
+  })) || [];
 
   return (
     <div className={styles.home}>
@@ -58,25 +49,16 @@ export default function HomePage() {
           {/* Lista de todos los eventos */}
           <section className={styles.eventsList}>
             <div className={styles.eventos}>
-              {eventos.map((evento) => {
-                const eventDate = new Date(evento.schedule.date_start);
-                const formattedDate = eventDate.toLocaleDateString('es-AR', {
-                  day: '2-digit',
-                  month: 'short',
-                  year: 'numeric'
-                });
-
-                return (
-                  <EventCard
-                    key={evento._id}
-                    eventId={evento._id}
-                    imageUrl={evento.media.imgs[0]}
-                    title={evento.title}
-                    date={formattedDate}
-                    venue={(evento.detail as any)?.venue || 'Ubicación por confirmar'}
-                  />
-                );
-              })}
+              {eventos.map((evento) => (
+                <EventCard
+                  key={evento._id}
+                  eventId={evento._id}
+                  imageUrl={evento.media.imgs[0]}
+                  title={evento.title}
+                  date={evento.schedule.date_start}
+                  venue={(evento.detail as any)?.venue || 'Ubicación por confirmar'}
+                />
+              ))}
             </div>
           </section>
         </>
