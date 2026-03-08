@@ -1,7 +1,3 @@
-'use client';
-
-import { Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
 import { LuHeart, LuBell, LuBookmark, LuCircleCheck } from 'react-icons/lu';
 import ActivityEventList from '@/components/ActivityEventList';
 import type { EventGridItem } from '@/components/EventsGrid';
@@ -25,14 +21,14 @@ const MOCK_USER_EVENTS: Record<ActivityTab, EventGridItem[]> = {
   attend: mockEvents.slice(1, 5).map((e) => ({ id: e._id, title: e.title, date: e.schedule.date_start, venue: e.detail?.venue || e.detail?.address || 'Ubicación por confirmar', imageUrl: e.media.imgs[0] })),
 };
 
-function ActivityContent() {
-  const searchParams = useSearchParams();
-  const tab = (searchParams.get('tab') ?? 'likes') as ActivityTab;
+export default async function ActivityPage({ searchParams }: { searchParams: Promise<{ tab?: string }> }) {
+  const { tab: rawTab } = await searchParams;
+  const tab = (rawTab ?? 'likes') as ActivityTab;
   const current = TAB_CONFIG[tab] ?? TAB_CONFIG.likes;
   const events = MOCK_USER_EVENTS[tab] ?? [];
 
   return (
-    <>
+    <main className={styles.activityPage}>
       {events.length === 0 ? (
         <div className={styles.emptyState}>
           <div className={styles.emptyIcon}>{current.icon}</div>
@@ -41,16 +37,6 @@ function ActivityContent() {
       ) : (
         <ActivityEventList events={events} />
       )}
-    </>
-  );
-}
-
-export default function ActivityPage() {
-  return (
-    <main className={styles.activityPage}>
-      <Suspense fallback={null}>
-        <ActivityContent />
-      </Suspense>
     </main>
   );
 }
