@@ -221,9 +221,9 @@ export default function EventDetailPage() {
         {/* Ticket Info */}
         <div className={styles.ticketSection} ref={ticketSectionRef}>
           <div className={styles.ticketInfo}>
-            <LuTicket size={24} />
+            <LuTicket size={40} />
             <div>
-              <p className={styles.ticketLabel}>Precio</p>
+              <p className={styles.ticketLabel}>Precio desde</p>
               <p className={styles.ticketPrice}>{formatPrice(event.ticket)}</p>
             </div>
           </div>
