@@ -33,7 +33,7 @@ $color-brand-secondary: #A64CCA;
 // Background Colors
 $color-bg-contrast: #2D2634;
 $color-bg-contrast-alpha: rgba(#606060, 0.3);
-$color-bg-contrast-attended: rgba(#366B38, 0.3);
+$color-bg-contrast-attended: rgba(#4f7c51, 0.3);
 $color-bg-menu: #212328;
 $color-overlay: rgba(#000000, 0.75);
 
@@ -52,6 +52,12 @@ $color-tag-location-click: rgba(#A64CCA, 0.2);
 $color-gradient-start: #080111;
 $color-gradient-end: #200404;
 $gradient-page-background: linear-gradient(90deg, $color-gradient-start 0%, $color-gradient-end 100%);
+
+//TODO: revisar estos colores, no se están usando y no se si son necesarios. De ser así, agregar a los componentes correspondientes
+// EventCard Attended Gradient
+$color-gradient-start-attended: rgba(#366B38, 0.2);
+$color-gradient-end-attended: rgba(#6AD16D, 0.1);
+$gradient-eventcard-attended: linear-gradient(90deg, $color-gradient-start-attended 0%, $color-gradient-end-attended 100%);
 
 // Shadows
 $shadow-banner-text: 0 4px 15.3px rgba(#000000, 0.71);

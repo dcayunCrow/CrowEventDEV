@@ -10,7 +10,6 @@
   gap: 1.5rem;
   width: 100%;
   height: 5.625rem;
-
   background: $color-bg-contrast-alpha;
   border-radius: $radius-crow;
   cursor: pointer;
@@ -23,6 +22,14 @@
   &:hover {
     background: rgba(#606060, 0.4);
     transform: scale(1.01);
+  }
+}
+
+.cardAttended {
+  background: $color-bg-contrast-attended;
+
+  &:hover {
+    background:  rgba($color-bg-contrast-attended, 0.4);
   }
 }
 
@@ -93,18 +100,50 @@
   color: $color-text-primary;
 }
 
+.cardActions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  padding: 0.25rem 0;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: $color-brand-primary;
+  padding: 0.25rem;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  svg {
+    display: block;
+  }
+}
+
+.actionSpacer {
+  height: 1.125rem;
+}
+
 .moreOptionsBtn {
   flex: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  align-self: flex-end;
   background: transparent;
   border: none;
   cursor: pointer;
   color: $color-text-primary;
   padding: 0;
-  margin-bottom: 0.25rem;
   margin-right: -0.25rem;
   transition: opacity 0.2s;
 

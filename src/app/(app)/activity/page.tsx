@@ -1,10 +1,18 @@
 import { LuHeart, LuBell, LuBookmark, LuCircleCheck } from 'react-icons/lu';
 import ActivityEventList from '@/components/ActivityEventList';
+import type { CardAction } from '@/components/EventCardHorizontal/EventCardHorizontal';
 import type { EventGridItem } from '@/components/EventsGrid';
 import { mockEvents } from '@/data/mockEvents';
 import styles from './activity.module.scss';
 
 type ActivityTab = 'likes' | 'notify' | 'save' | 'attend';
+
+const TAB_ACTION: Record<ActivityTab, CardAction | undefined> = {
+  likes:  'like',
+  notify: 'notify',
+  save:   'save',
+  attend: undefined,
+};
 
 const TAB_CONFIG: Record<ActivityTab, { icon: React.ReactNode; empty: string }> = {
   likes:  { icon: <LuHeart size={40} />,       empty: 'Todavía no le diste me gusta a ningún evento.' },
@@ -23,9 +31,12 @@ const MOCK_USER_EVENTS: Record<ActivityTab, EventGridItem[]> = {
 
 export default async function ActivityPage({ searchParams }: { searchParams: Promise<{ tab?: string }> }) {
   const { tab: rawTab } = await searchParams;
-  const tab = (rawTab ?? 'likes') as ActivityTab;
-  const current = TAB_CONFIG[tab] ?? TAB_CONFIG.likes;
-  const events = MOCK_USER_EVENTS[tab] ?? [];
+  const tab: ActivityTab = ['likes', 'notify', 'save', 'attend'].includes(rawTab as string)
+    ? (rawTab as ActivityTab)
+    : 'likes';
+  const current = TAB_CONFIG[tab];
+  const events = MOCK_USER_EVENTS[tab];
+  const action = TAB_ACTION[tab];
 
   return (
     <main className={styles.activityPage}>
@@ -35,7 +46,7 @@ export default async function ActivityPage({ searchParams }: { searchParams: Pro
           <p className={styles.emptyText}>{current.empty}</p>
         </div>
       ) : (
-        <ActivityEventList events={events} />
+        <ActivityEventList events={events} action={action} attended={tab === 'attend'} />
       )}
     </main>
   );
