@@ -4,12 +4,27 @@
 .navbar {
   position: sticky;
   top: 0;
-  width: 100%;
-  background-color: rgba(#242424, 0.5);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
   z-index: 1000;
+  border-bottom: 1px solid rgba($color-text-primary, 0.06);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  @supports (backdrop-filter: blur(1px)) {
+    background: rgba(#242424, 0.6);
+    backdrop-filter: blur(12px) saturate(160%) brightness(1.05);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0)
+    );
+  }
 }
+
 
 // ----------------------------------------
 // Inner layout (todas las variantes)
