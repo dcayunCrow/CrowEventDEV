@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { LuEllipsisVertical, LuHeart, LuBell, LuBookmark } from 'react-icons/lu';
+import { LuEllipsisVertical, LuTrash2 } from 'react-icons/lu';
 import { createPortal } from 'react-dom';
 import EventCardMenu from '../EventCardMenu';
 import Overlay from '../Overlay';
@@ -11,12 +11,6 @@ import { formatEventDate } from '@/utils/dateUtils';
 import styles from './EventCardHorizontal.module.scss';
 
 export type CardAction = 'like' | 'notify' | 'save';
-
-const ACTION_ICON: Record<CardAction, React.ReactNode> = {
-  like:   <LuHeart size={18} />,
-  notify: <LuBell size={18} />,
-  save:   <LuBookmark size={18} />,
-};
 
 const ACTION_LABEL: Record<CardAction, string> = {
   like:   'Quitar me gusta',
@@ -127,7 +121,7 @@ export default function EventCardHorizontal({
               onClick={handleActionClick}
               aria-label={ACTION_LABEL[action]}
             >
-              {ACTION_ICON[action]}
+              <LuTrash2 size={18} />
             </button>
           ) : (
             <span className={styles.actionSpacer} />
